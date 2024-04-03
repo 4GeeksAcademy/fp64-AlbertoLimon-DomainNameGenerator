@@ -79,20 +79,22 @@ window.onload = function() {
   const getPronounAdjetiveNounList = pronounAdjetiveList => {
     const nounList = ["jogger", "racoon"];
 
-    pronounAdjetiveList.reduce((state, pronounAdjetive) => {
+    return pronounAdjetiveList.reduce((state, pronounAdjetive) => {
       nounList.forEach(noun => {
         state = [...state, `${pronounAdjetive}${noun}.com`];
       });
+
       return state;
     }, []);
   };
 
   function main() {
     const pronounAdjetiveList = getPronounAdjetiveList();
+    console.log("hola", pronounAdjetiveList);
     const pronounAdjetiveNounList = getPronounAdjetiveNounList(
       pronounAdjetiveList
     );
-    printpronounAdjectiveNoun(pronounAdjetiveNounList);
+    //printpronounAdjectiveNoun(pronounAdjetiveNounList);
   }
 
   main();
