@@ -64,37 +64,52 @@ window.onload = function() {
 
   */
 
+  const getReduce = (listaPadre, listaHijo) => {
+    return listaPadre.reduce((state, elementoListaPadre) => {
+      listaHijo.forEach(elementoListaHijo => {
+        state = [...state, `${elementoListaPadre}${elementoListaHijo}`];
+      });
+      return state;
+    }, []);
+  };
+
   const getPronounAdjetiveList = () => {
     const pronounList = ["the", "our"];
     const adjList = ["great", "big"];
 
-    pronounList.reduce((state, pronoun) => {
-      adjList.forEach(adjetive => {
-        state = [...state, `${pronoun}${adjetive}`];
-      });
-      return state;
-    }, []);
+    return getReduce(pronounList, adjList);
   };
 
   const getPronounAdjetiveNounList = pronounAdjetiveList => {
     const nounList = ["jogger", "racoon"];
 
-    return pronounAdjetiveList.reduce((state, pronounAdjetive) => {
-      nounList.forEach(noun => {
-        state = [...state, `${pronounAdjetive}${noun}.com`];
-      });
+    return getReduce(pronounAdjetiveList, nounList);
+  };
 
-      return state;
-    }, []);
+  const getPronounAdjetiveNounDotList = pronounAdjetiveNounList => {
+    const dotList = [".com", ".net"];
+
+    return getReduce(pronounAdjetiveNounList, dotList);
+  };
+
+  const printAllCombinations = pronounAdjetiveNounDotList => {
+    pronounAdjetiveNounDotList.forEach(pronounAdjetiveNounDot => {
+      console.log(pronounAdjetiveNounDot);
+    });
   };
 
   function main() {
     const pronounAdjetiveList = getPronounAdjetiveList();
-    console.log("hola", pronounAdjetiveList);
+
     const pronounAdjetiveNounList = getPronounAdjetiveNounList(
       pronounAdjetiveList
     );
-    //printpronounAdjectiveNoun(pronounAdjetiveNounList);
+
+    const pronounAdjetiveNounDotList = getPronounAdjetiveNounDotList(
+      pronounAdjetiveNounList
+    );
+
+    printAllCombinations(pronounAdjetiveNounDotList);
   }
 
   main();
